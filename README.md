@@ -1,5 +1,5 @@
 # Flask on Heroku 
-<i>Edited 12/03/15 By Samuel Thorpe</i>
+<i>Edited 12/03/15 By Samuel Thorpe (cdm1 and vagrant@DO)</i>
 
 This project is intended to help you tie together some important concepts and
 technologies from the 12-day course, including Git, Flask, JSON, Pandas,

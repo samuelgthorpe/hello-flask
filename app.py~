@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+# edit this file to add functionality for stock ticker project
 
 app = Flask(__name__)
 

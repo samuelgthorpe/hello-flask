@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect
 # edit this file to add functionality for stock ticker project
+# to debug locally:
+# http://127.0.0.1:33507
+
 
 app = Flask(__name__)
 

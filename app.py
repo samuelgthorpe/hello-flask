@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 """
 app.py 
-  
 
-Add description here...
+This repository contains a simple Quandl Stock Ticker Flask app that runs on Heroku.
+The app takes as input a stock ticker code (and optional start year) and displays a Bokeh plot of the stock time series. Stock price data comes from the Quandl WIKI database (https://www.quandl.com/data/WIKI), queried via the requests module.
+Link to the finished app: https://hello-flask-samuelgthorpe.herokuapp.com
 
+The project was completed for the purpose of learning how to tie together some important concepts and
+technologies, including Git, Flask, JSON, Pandas, Requests, Heroku, and Bokeh for visualization.
   
 # INPUTS 
 # -----------------------------------------------------------------------------|
@@ -36,7 +39,6 @@ from bokeh.plotting import figure
 from bokeh.io import show
 from bokeh.embed import components
 bv = bokeh.__version__
-from sampy.common import keyboard  ## MAKE SURE TO REMOVE BEFORE PUSHING TO HEROKU
 
 
 # # app Flask

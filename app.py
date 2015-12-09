@@ -36,6 +36,7 @@ from bokeh.plotting import figure
 from bokeh.io import show
 from bokeh.embed import components
 bv = bokeh.__version__
+from sampy.common import keyboard  ## MAKE SURE TO REMOVE BEFORE PUSHING TO HEROKU
 
 
 # # app Flask
@@ -43,7 +44,6 @@ bv = bokeh.__version__
 app = Flask(__name__)
 app.vars={}
 feat = ['Open','Close','Range']
-api_key = '9vEHVqxnmEMYXspeTi6v'
 
 
 @app.route('/')
@@ -75,7 +75,7 @@ def graph():
 	# Request data from Quandl and get into pandas
 	# --------------------------------------------|
 	req = 'https://www.quandl.com/api/v3/datasets/WIKI/'
-	req = '%s%s.json?api_key=%s&collapse=weekly' % (req,app.vars['ticker'],api_key)
+	req = '%s%s.json?&collapse=weekly' % (req,app.vars['ticker'])
 	if not app.vars['start_year']=='':
 		req = '%s&start_date=%s-01-01' % (req,app.vars['start_year'])
 	r = requests.get(req)
@@ -86,6 +86,8 @@ def graph():
 	if not app.vars['start_year']=='':
 		if df.Date.iloc[-1].year>int(app.vars['start_year']):
 			app.vars['tag'] = '%s, but Quandl record begins in %s' % (app.vars['tag'],df.Date.iloc[-1].year)
+	app.vars['desc'] = r.json()['dataset']['name'].split(',')[0]
+	
 	
 	# Make Bokeh plot and insert using components
 	# ------------------- ------------------------|
@@ -95,9 +97,9 @@ def graph():
 		tmpy = np.array([df.High,df.Low[::-1]]).flatten()
 		p.patch(tmpx, tmpy, alpha=0.3, color="gray",legend='Range (High/Low)')
 	if 'Open' in app.vars['select']:
-		p.line(df.Date, df.Open, line_width=2, line_color="green",legend='Opening price')
+		p.line(df.Date, df.Open, line_width=2,legend='Opening price')
 	if 'Close' in app.vars['select']:
-		p.line(df.Date, df.Close, line_width=2, line_color="red",legend='Closing price')
+		p.line(df.Date, df.Close, line_width=2, line_color="#FB8072",legend='Closing price')
 	p.legend.orientation = "top_left"
 		
 	# axis labels
@@ -115,7 +117,9 @@ def graph():
 	# render graph template
 	# ------------------- ------------------------|
 	script, div = components(p)
-	return render_template('graph.html',bv=bv,ticker=app.vars['ticker'],tag=app.vars['tag'],script=script,div=div)
+	return render_template('graph.html', bv=bv, ticker=app.vars['ticker'],
+							ttag=app.vars['desc'], yrtag=app.vars['tag'],
+							script=script, div=div)
 		
 	
 @app.errorhandler(500)

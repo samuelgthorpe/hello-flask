@@ -1,0 +1,71 @@
+#!/usr/bin/env python
+"""
+app_tests.py 
+  
+
+test requests for quandl api, wrangling with pandas, plotting with bokeh
+
+  
+# INPUTS 
+# -----------------------------------------------------------------------------|
+ 
+  
+# OUTPUTS 
+# -----------------------------------------------------------------------------| 
+
+  
+# NOTES 
+# -----------------------------------------------------------------------------|
+to debug locally:
+http://127.0.0.1:33507
+
+ 
+Written 12/08/2015
+By Sam Thorpe 
+"""
+
+
+# # Module Imports
+# -----------------------------------------------------|
+#from flask import Flask, render_template, request, redirect
+from sampy.common import keyboard
+from bokeh.plotting import figure
+from bokeh.embed import components
+import numpy as np
+import pandas as pd
+import requests
+api_key = '9vEHVqxnmEMYXspeTi6v'
+
+
+# # Defs
+# -----------------------------------------------------|
+def test_quandl(ticker):
+	
+	req = 'https://www.quandl.com/api/v3/datasets/WIKI/'
+	req = '%s%s.json?api_key=%s' % (req,ticker,api_key)
+	req = req+'&column_index=1&column_index=2&column_index=3&column_index=4'
+	
+	r = requests.get(req)
+	keyboard(locals(),globals())
+	cols = r.json()['dataset']['column_names'][0:4]
+	#tmpdat = np.array(r.json()['dataset']['data'])[:,0:4]
+	tmpdat = np.array(r.json()['dataset']['data'])
+	
+	#First, request data from Quandl here and get into pandas
+	#Make Bokeh plot from pandas dataframe
+	#Insert using Bokeh components
+	# # script, div = components(plot)
+	# # also pass the html/javascript to load BokehJS from CDN
+
+    
+# # If main
+# -----------------------------------------------------|
+if __name__ == '__main__':
+	ticker = 'AAPL'
+	test_quandl(ticker)
+  
+  
+  
+#                                    END ALL
+# # ---------------------------------------------------------------------------|
+    

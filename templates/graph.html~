@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Hello, Graph!</title>
+		<link rel=stylesheet type=text/css href='{{ url_for('static',filename='style_ticker.css')}}'>
+		<link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-{{bv}}.min.css" type="text/css" />
+		<script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-{{bv}}.min.js"></script>
+		{{script|safe}}
+	</head>
+	<body>
+		<div class=page>
+  			<h1>Historic Quandl prices for {{ticker}}</h1>
+  			<p><a href="/index">Back</a></p>
+			<div align="center">{{div|safe}}</div>
+		</div>
+	</body>
+</html>

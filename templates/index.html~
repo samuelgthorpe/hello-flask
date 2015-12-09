@@ -3,26 +3,30 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Hello, Flask!</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<link rel=stylesheet type=text/css href='{{ url_for('static',filename='style_ticker.css')}}'>
 	</head>
 	<div class=page>
-  			<h1>Simple Stock Tracker</h1>
+  			<h1>Quandl Stock Tracker</h1>
   			<div class=metanav>
 
-    			<h4>Enter a stock ticker (eg. GOOG), and check desired features.</h4>
+    			<h2>Enter a stock ticker (eg. GOOG), and check desired features.</h2>
 
     			<form id='input' method='post' action='index'>	
 	  			<p>
 					Ticker symbol: <input type='text' name='ticker' />
 	  			</p>
 	  			<p>
-					<input type="checkbox" name='features' value='Close'>Closing price<br>
-					<input type="checkbox" name='features' value='Open'>Opening price<br>
-	    			<input type="submit" value="Submit">
+					Start year: <input type='text' name='year' />
+					<br><i>defaults to first year of Quandl record</i>
 	  			</p>
+	  			<p>
+	  				<input type="checkbox" name='feat1' value='Open'>Opening price<br>
+					<input type="checkbox" name='feat2' value='Close'>Closing price<br>
+					<input type="checkbox" name='feat3' value='Range'>Range (High/Low)<br>
+	  			</p>
+	  			<p>
+	    			<input type="submit" value="Submit">
+	  			</p>  		
 				</form>
 
   			</div>
